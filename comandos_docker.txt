@@ -1,12 +1,21 @@
 * docker pull -> descarga una imagen de docker
 
-* docker run -d -e POSTGRES_PASSWORD=password postgres:lastest
-** run -> arranca la imagen, además si no existe hace un docker pull de la imagen
-** -d -> ejecuta en segundo plano la imagen
-** -e -< se indica para agregar una nueva variable de entorno
+* docker run -d -e POSTGRES_PASSWORD=password postgres:latest
+** run -> arranca el contenedor, además si no existe hace un docker pull de la imagen
+** -d -> ejecuta en segundo plano el contenedor
+** -e -> se indica para agregar una nueva variable de entorno
+** --name -> se le puede agregar un nombre al contenedor
 ** postgres:latest -> puedes indicar la versión(Tag) de la imagen (usar Docker hub)
 
 * docker images -> puedes ver todas las imagenes creadas
 
-* docker ps -> puedes ver todas las imagenes activas
+* docker ps -> puedes ver todas los contenedores activos
+** -a -> se pueden ver contenedores activos e inactivos
+
+* docker stop <container_id> or <container_name>
+
+* docker rm <container_id> <container_id> or <container_name> <container_name> -> se pueden eliminar varios contenedores en un solo comando
+** -f -> se puede forzar la eliminación de un contenedor si esta activo
+
+* docker rmi -f <image_id> -> para poder borrar una imagen es necesario primeramente eliminar todos los contenedores asociados a esa imagen, además la eliminación debe ser forzosa
 
