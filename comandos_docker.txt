@@ -1,0 +1,12 @@
+* docker pull -> descarga una imagen de docker
+
+* docker run -d -e POSTGRES_PASSWORD=password postgres:lastest
+** run -> arranca la imagen, además si no existe hace un docker pull de la imagen
+** -d -> ejecuta en segundo plano la imagen
+** -e -< se indica para agregar una nueva variable de entorno
+** postgres:latest -> puedes indicar la versión(Tag) de la imagen (usar Docker hub)
+
+* docker images -> puedes ver todas las imagenes creadas
+
+* docker ps -> puedes ver todas las imagenes activas
+
