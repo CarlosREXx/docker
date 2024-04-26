@@ -1,9 +1,11 @@
 * docker pull -> descarga una imagen de docker
 
 * docker run -d -e POSTGRES_PASSWORD=password postgres:latest
+*** docker run -d -p 3000:3000 node_image_v1.0
 ** run -> arranca el contenedor, además si no existe hace un docker pull de la imagen
 ** -d -> ejecuta en segundo plano el contenedor
 ** -e -> se indica para agregar una nueva variable de entorno
+** -p -> puerto del contenedor expuesto en el puerto de la maquina
 ** --name -> se le puede agregar un nombre al contenedor
 ** postgres:latest -> puedes indicar la versión(Tag) de la imagen (usar Docker hub)
 
@@ -11,11 +13,47 @@
 
 * docker ps -> puedes ver todas los contenedores activos
 ** -a -> se pueden ver contenedores activos e inactivos
+** --filter status=exited -> se puede hacer un filtrado de los contenedores
+** -q -> solo muestra los id's de los contenedores
 
 * docker stop <container_id> or <container_name>
 
+* docker start <container_id> or <container_name>
+
+* docker restart <container_id> or <container_name>
+** --signal, -s -> Signal to send to the container
+** --time, -t -> Seconds to wait before killing the container
+
 * docker rm <container_id> <container_id> or <container_name> <container_name> -> se pueden eliminar varios contenedores en un solo comando
 ** -f -> se puede forzar la eliminación de un contenedor si esta activo
+*** docker rm $(docker ps --filter status=exited -q) -> se pueden filtrar los contenedores mediante una condición usando 
+    docker ps --filter <condition> 
 
 * docker rmi -f <image_id> -> para poder borrar una imagen es necesario primeramente eliminar todos los contenedores asociados a esa imagen, además la eliminación debe ser forzosa
+** docker rmi $(docker images --filter before=7af9ba4f0a47 -q) -> se pueden eliminar multiples imagenes por medio de un filtro
 
+* docker exec -it <container_id> sh -> se puede ejecutar dentro de un contenedor que esta en ejecución
+** -it -> abre de forma iterativa una terminal
+** sh -> ejecuta la terminal
+
+* docker logs --details -f <container_id> -> muestra los logs generados por un contenedor
+** --details -> Show extra details provided to logs
+** -follow, -f -> Follow log output
+** -t, --timestamps -> Muestra los timestamps
+** --since -> Show logs since timestamp
+** -n, --tail -> Número de lineas para mostrar desde el final del log por defecto "all"
+** --until -> Show logs before a timestamp
+
+* docker search <imagen>
+** --limit=3 -> se obtiene solo el numero indicado de versiones 
+** --filter=stars=50 -> se pueden hacer filtros dependiendo del campo
+
+* docker rename <container> <new_name>
+
+* docker info -> puedes ver la información del sistema
+
+* docker save -o C:\Users\crocha\Documents\Projects\images_save\redis.tar redis -> sirve para comprimir una imagen
+
+* docker load -i C:\Users\crocha\Documents\Projects\images_save\redis.tar -> sirve para cargar una imagen desde un archivo comprimido
+
+* docker stats -> se pueden ver las estadiscas de cada contenedor en tiempo real
