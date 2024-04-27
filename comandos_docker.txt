@@ -1,11 +1,15 @@
+
 * docker pull -> descarga una imagen de docker
 
 * docker run -d -e POSTGRES_PASSWORD=password postgres:latest
 *** docker run -d -p 3000:3000 node_image_v1.0
+*** docker run -v C:/Users/crocha/Documents/Projects/docker/app/etc:/etc/todos -dp 3000:3000 node_image_v1.0 -> se pueden crear volumenes cuando sea necesario crear un backup de base de datos
+*** docker run -d -v C:/Users/crocha/Documents/Projects/docker/app/etc:/etc/todos -v C:/Users/crocha/Documents/Projects/docker/app/src:/app/src -p 3000:3000 node_image_v1.0 -> incluso se puede crear un volumen del mismo proyecto para ver reflejado los cambios
 ** run -> arranca el contenedor, además si no existe hace un docker pull de la imagen
 ** -d -> ejecuta en segundo plano el contenedor
 ** -e -> se indica para agregar una nueva variable de entorno
 ** -p -> puerto del contenedor expuesto en el puerto de la maquina
+** -v -> se pueden crear volumenes de diferentes contenidos de una carpeta en especifico
 ** --name -> se le puede agregar un nombre al contenedor
 ** postgres:latest -> puedes indicar la versión(Tag) de la imagen (usar Docker hub)
 
@@ -57,3 +61,12 @@
 * docker load -i C:\Users\crocha\Documents\Projects\images_save\redis.tar -> sirve para cargar una imagen desde un archivo comprimido
 
 * docker stats -> se pueden ver las estadiscas de cada contenedor en tiempo real
+
+* docker build -t node_image_v1.0 .
+*** docker build -t node_image_v1.0:v1.1 . -> para ver los cambios de los volumenes es importante crear una nueva imagen con un nuevo Tag
+
+* docker login -> loggearte a tu cuenta de docker hub
+
+>>> Proceso para subir una imagen al docker hub
+* docker tag 40f4e9811654 carlosrocha0194/node_image_v1.0:v1.1 -> creas una nuevo tag para esa imagen
+* docker push carlosrocha0194/node_image_v1.0:v1.1 -> empujas la imagen e docker hub
